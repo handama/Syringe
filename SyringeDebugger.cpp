@@ -13,6 +13,7 @@
 #include <numeric>
 
 #include <DbgHelp.h>
+#include <list>
 
 using namespace std;
 
@@ -754,9 +755,27 @@ bool SyringeDebugger::ParseHooksSection(
 	constexpr auto const Size = sizeof(hookdecl);
 	auto const base = DLL.GetImageBase();
 	auto const filename = std::string_view(DLL.GetFilename());
+	auto const skipname = std::string(filename) + ".skip";
+	list<string> skiplist;
 
 	auto const begin = hooks.PointerToRawData;
 	auto const end = begin + hooks.SizeOfRawData;
+
+	if (auto const file = FileHandle(_fsopen(skipname.c_str(), "r", _SH_DENYWR))) {
+		constexpr auto Size = 0x100;
+		char line[Size];
+		while (fgets(line, Size, file)) {
+			if (*line != ';' && *line != '\r' && *line != '\n') {
+				char eip[7];
+
+				// parse the line
+				if (sscanf_s(line, "%6s", eip) == 1)
+				{
+					skiplist.push_back(eip);
+				}
+			}
+		}
+	}
 
 	std::string hookName;
 	for(auto ptr = begin; ptr < end; ptr += Size) {
@@ -767,8 +786,21 @@ bool SyringeDebugger::ParseHooksSection(
 			if(h.hookNamePtr) {
 				auto const rawNamePtr = DLL.VirtualToRaw(h.hookNamePtr - base);
 				if(DLL.ReadCString(rawNamePtr, hookName)) {
-					auto const eip = reinterpret_cast<void*>(h.hookAddr);
-					buffer.add(eip, filename, hookName, h.hookSize);
+
+					bool skip = false;
+					for (const auto& element : skiplist) {
+						if ((int)h.hookAddr == stoi(element, 0, 16))
+						{
+							skip = true;
+							Log::WriteLine(__FUNCTION__ ": Hook skipped: \"%s\".", element.c_str());
+						}
+					}
+					
+					if (!skip)
+					{
+						auto const eip = reinterpret_cast<void*>(h.hookAddr);
+						buffer.add(eip, filename, hookName, h.hookSize);
+					}
 				}
 			}
 		} else {
