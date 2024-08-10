@@ -642,6 +642,8 @@ void SyringeDebugger::FindDLLs()
 				canLoad = ParseInjFileHooks(fn, buffer);
 			}
 
+			canLoad = true;
+
 			if(canLoad) {
 				Log::WriteLine(
 					__FUNCTION__ ": Recognized DLL: \"%.*s\"", printable(fn));
@@ -800,6 +802,7 @@ bool SyringeDebugger::ParseHooksSection(
 					{
 						auto const eip = reinterpret_cast<void*>(h.hookAddr);
 						buffer.add(eip, filename, hookName, h.hookSize);
+						Log::WriteLine(__FUNCTION__ ": Add Hook: \"%d\".", h.hookAddr);
 					}
 				}
 			}

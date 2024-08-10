@@ -3,12 +3,12 @@ cl : 命令行 warning D9035: “Gm”选项已否决，并将在将来的版本
   SyringeDebugger.cpp
 c:\program files (x86)\microsoft sdks\windows\v7.1a\include\dbghelp.h(1540): warning C4091: “typedef ”: 没有声明变量时忽略“<unnamed-enum-hdBase>”的左侧
 c:\program files (x86)\microsoft sdks\windows\v7.1a\include\dbghelp.h(3056): warning C4091: “typedef ”: 没有声明变量时忽略“<unnamed-enum-sfImage>”的左侧
-c:\users\hanfangxu\documents\github\syringe\syringedebugger.cpp(765): warning C4456: “Size”的声明隐藏了上一个本地声明
-  c:\users\hanfangxu\documents\github\syringe\syringedebugger.cpp(755): note: 参见“Size”的声明
-c:\users\hanfangxu\documents\github\syringe\syringedebugger.cpp(772): warning C4473: “sscanf_s”: 没有为格式字符串传递足够的参数
-  c:\users\hanfangxu\documents\github\syringe\syringedebugger.cpp(772): note: 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
-  c:\users\hanfangxu\documents\github\syringe\syringedebugger.cpp(772): note: 缺失的可变参数 2 为格式字符串“%6s”所需
-  c:\users\hanfangxu\documents\github\syringe\syringedebugger.cpp(772): note: 此参数用作缓冲区大小
+c:\users\hanfangxu\source\repos\drawscripts\syringe\syringedebugger.cpp(767): warning C4456: “Size”的声明隐藏了上一个本地声明
+  c:\users\hanfangxu\source\repos\drawscripts\syringe\syringedebugger.cpp(757): note: 参见“Size”的声明
+c:\users\hanfangxu\source\repos\drawscripts\syringe\syringedebugger.cpp(774): warning C4473: “sscanf_s”: 没有为格式字符串传递足够的参数
+  c:\users\hanfangxu\source\repos\drawscripts\syringe\syringedebugger.cpp(774): note: 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
+  c:\users\hanfangxu\source\repos\drawscripts\syringe\syringedebugger.cpp(774): note: 缺失的可变参数 2 为格式字符串“%6s”所需
+  c:\users\hanfangxu\source\repos\drawscripts\syringe\syringedebugger.cpp(774): note: 此参数用作缓冲区大小
   正在生成代码
   已完成代码的生成
-  Debugger.vcxproj -> C:\Users\hanfangxu\Documents\GitHub\Syringe\.\Release\Syringe.exe
+  Debugger.vcxproj -> C:\Users\hanfangxu\source\repos\DrawScripts\Syringe\.\Release\Syringe.exe
